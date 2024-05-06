@@ -1,3 +1,4 @@
+import { CLIENT_URL } from "@/configs";
 import { CategoryObj, LinkObj, SubCategoryObj } from "@/types/interfaces";
 import axios from "axios";
 import { notFound } from "next/navigation";
@@ -15,7 +16,7 @@ export const getLinks = async (
   subCategory: SubCategoryObjWithCategory;
 }> => {
   const res = await axios.get(
-    `${process.env.CLIENT_URL}/api/links/${subCategoryId}?page=${page}`
+    `${CLIENT_URL}/api/links/${subCategoryId}?page=${page}`
   );
 
   if (!res.data?.success && res.data.statusCode === 404) {

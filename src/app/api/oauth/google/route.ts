@@ -1,3 +1,4 @@
+import { CLIENT_URL } from "@/configs";
 import google from "@/lib/auth/google";
 import lucia from "@/lib/auth/lucia";
 import { db } from "@/lib/db";
@@ -153,10 +154,7 @@ export const GET = async (req: NextRequest) => {
     revalidatePath("/", "layout");
 
     return NextResponse.redirect(
-      new URL(
-        cookies().get("prevRoute")?.value! || "",
-        process.env.NEXT_PUBLIC_BASE_URL
-      ),
+      new URL(cookies().get("prevRoute")?.value! || "", CLIENT_URL),
       { status: 302 }
     );
   } catch {

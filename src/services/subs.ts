@@ -1,3 +1,4 @@
+import { CLIENT_URL } from "@/configs";
 import { CategoryObj, SubCategoryObj } from "@/types/interfaces";
 import axios from "axios";
 import { notFound } from "next/navigation";
@@ -8,9 +9,7 @@ export const getSubCategories = async (
   subCategories: SubCategoryObj[];
   category: Partial<CategoryObj>;
 }> => {
-  const res = await axios.get(
-    `${process.env.CLIENT_URL}/api/subs/${categoryId}`
-  );
+  const res = await axios.get(`${CLIENT_URL}/api/subs/${categoryId}`);
 
   if (!res.data?.success && res.data.statusCode === 404) {
     return notFound();

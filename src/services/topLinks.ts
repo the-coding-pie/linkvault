@@ -1,9 +1,10 @@
+import { CLIENT_URL } from "@/configs";
 import { LinkWithCategoryAndSubObj } from "@/types/interfaces";
 
 export const getTopLinks = async (): Promise<{
   topLinks: LinkWithCategoryAndSubObj[];
 }> => {
-  const res = await fetch(`${process.env.CLIENT_URL}/api/links/top`, {
+  const res = await fetch(`${CLIENT_URL}/api/links/top`, {
     cache: "no-store",
     next: { tags: ["topLinks"] },
   });

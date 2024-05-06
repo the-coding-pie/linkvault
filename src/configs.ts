@@ -1,6 +1,6 @@
 export const APP_NAME = "link vault";
 
-export const CLIENT_URL = process.env.CLIENT_URL;
+export const CLIENT_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // FORGOT PASSWORD TOKEN
 export const FORGOT_PASSWORD_TOKEN_LENGTH = 124;
