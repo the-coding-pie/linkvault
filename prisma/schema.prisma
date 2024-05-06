@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username          String             @unique @db.VarChar(50)
+  createdAt         DateTime           @default(now())
+  email             String             @unique @db.VarChar(100)
+  emailVerified     Boolean            @default(false)
+  isAdmin           Boolean            @default(false)
+  isOAuth           Boolean            @default(false)
+  name              String             @db.VarChar(50)
+  passwordHash      String?
+  profile           String             @default("default.jpg")
+  updatedAt         DateTime           @updatedAt
+  usernameUpdated   Boolean            @default(false)
+  id                Int                @id @default(autoincrement())
+  emailVerification EmailVerification?
+  forgotPassword    ForgotPassword?
+  links             Link[]
+  sessions          Session[]
+  tempLinks         TempLink[]
+  votes             Vote[]
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model EmailVerification {
+  id        Int      @id @default(autoincrement())
+  code      String   @db.VarChar(12)
+  createdAt DateTime @default(now())
+  emailSent Boolean  @default(true)
+  expiresAt DateTime
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ForgotPassword {
+  id        Int      @id @default(autoincrement())
+  token     String   @db.VarChar(124)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TempLink {
+  id             Int      @id @default(autoincrement())
+  title          String   @db.VarChar(100)
+  url            String
+  description    String?  @db.VarChar(150)
+  category       String
+  subCategory    String
+  categoryNew    Boolean
+  subCategoryNew Boolean
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         Int?
+  postedBy       User?    @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(80)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subCategories SubCategory[]
+}
+
+model SubCategory {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(80)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categoryId Int?
+  links      Link[]
+  category   Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Link {
+  id            Int     @id @default(autoincrement())
+  title         String  @db.VarChar(100)
+  url           String
+  description   String? @db.VarChar(150)
+  subCategoryId Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId      Int?
+  subCategory SubCategory? @relation(fields: [subCategoryId], references: [id])
+  postedBy    User?        @relation(fields: [userId], references: [id])
+  votes       Vote[]
+}
+
+model Vote {
+  id      Int   @id @default(autoincrement())
+  userId  Int?
+  linkId  Int?
+  link    Link? @relation(fields: [linkId], references: [id])
+  votedBy User? @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
