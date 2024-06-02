@@ -72,7 +72,7 @@ const RegisterModal = ({ children }: Props) => {
       // @ts-ignore
       window.location.href = res.data!.toString()!;
     }
-  }, []);
+  }, [pathname]);
 
   const handleSignInModal = useCallback(() => {
     setOpen(false);

@@ -70,7 +70,7 @@ const LoginModal = ({ children }: Props) => {
       // @ts-ignore
       window.location.href = res.data!.toString()!;
     }
-  }, []);
+  }, [pathname]);
 
   const handleSignUpModal = useCallback(() => {
     setOpen(false);

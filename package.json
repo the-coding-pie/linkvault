@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "postinstall": "npm rebuild argon2 --build-from-source"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
