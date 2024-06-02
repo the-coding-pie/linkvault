@@ -12,7 +12,7 @@ const AdminLayout = async ({
     notFound();
   }
 
-  return <>hello{children}</>;
+  return <>{children}</>;
 };
 
 export default AdminLayout;
