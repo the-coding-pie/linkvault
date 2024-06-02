@@ -1,4 +1,4 @@
-export const APP_NAME = "link vault";
+export const APP_NAME = "listed.sh";
 
 export const CLIENT_URL =
   process.env.NODE_ENV === "production"

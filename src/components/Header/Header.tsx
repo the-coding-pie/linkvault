@@ -13,7 +13,7 @@ const Header = async () => {
     <header className="header fixed top-0 bg-white border-b left-0 right-0 w-full z-30">
       <div className="container h-[62px] flex items-center justify-between">
         <div className="left">
-          <Link href={"/"}>LinkVault</Link>
+          <Link href={"/"}>Listed.sh</Link>
         </div>
         <div className="right flex items-center justify-end gap-4">
           {session ? (
