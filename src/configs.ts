@@ -2,7 +2,7 @@ export const APP_NAME = "link vault";
 
 export const CLIENT_URL =
   process.env.NODE_ENV === "production"
-    ? `https://` + process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://www.listed.sh`
     : process.env.NEXT_PUBLIC_BASE_URL;
 
 // FORGOT PASSWORD TOKEN
