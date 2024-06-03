@@ -45,15 +45,19 @@ const AdminHome = async () => {
   });
 
   return (
-    <div className="container mt-8 flex flex-col gap-4">
-      {tempLinks.map((link) => (
-        <Form
-          key={link.id}
-          tempLink={link}
-          categories={categories}
-          subCategories={subCategories}
-        />
-      ))}
+    <div className="container mt-8 flex flex-col gap-4 min-h-screen">
+      {tempLinks.length > 0 ? (
+        tempLinks.map((link) => (
+          <Form
+            key={link.id}
+            tempLink={link}
+            categories={categories}
+            subCategories={subCategories}
+          />
+        ))
+      ) : (
+        <p>No link submissions :(</p>
+      )}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import validateRequest from "@/lib/auth/validateRequest";
 import { db } from "@/lib/db";
 import failure from "@/lib/responses/failure";
 import success from "@/lib/responses/success";
+import { revalidatePath } from "next/cache";
 
 // both below are done from client side
 // needs login - but not done
@@ -26,8 +27,6 @@ const acceptTempLink = async (tempLink: {
       return failure("Something went wrong");
     }
 
-    console.log(tempLink);
-
     let category: any = null;
     let subCategory: any = null;
 
@@ -47,7 +46,7 @@ const acceptTempLink = async (tempLink: {
       });
     }
 
-    if (tempLink.subCategory) {
+    if (tempLink.subCategoryNew) {
       // create category
       subCategory = await db.subCategory.create({
         data: {
@@ -70,7 +69,7 @@ const acceptTempLink = async (tempLink: {
         url: tempLink.url,
         description: tempLink.description,
         userId: tempLink.userId ? tempLink.userId : undefined,
-        subCategory: subCategory.id,
+        subCategoryId: subCategory.id,
       },
     });
 
@@ -81,8 +80,11 @@ const acceptTempLink = async (tempLink: {
       },
     });
 
+    revalidatePath("/admin");
+
     return success("Accepted 👍!");
-  } catch {
+  } catch (err) {
+    console.log(err);
     return failure("Something went wrong");
   }
 };

@@ -3,6 +3,7 @@ import validateRequest from "@/lib/auth/validateRequest";
 import { db } from "@/lib/db";
 import failure from "@/lib/responses/failure";
 import success from "@/lib/responses/success";
+import { revalidatePath } from "next/cache";
 
 const rejectTempLink = async ({ id }: { id: number }) => {
   try {
@@ -18,6 +19,8 @@ const rejectTempLink = async ({ id }: { id: number }) => {
         id,
       },
     });
+
+    revalidatePath("/admin");
 
     return success("Rejected 👍!");
   } catch {
