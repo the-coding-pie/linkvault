@@ -12,7 +12,7 @@ const AdminLayout = async ({
     notFound();
   }
 
-  return <>{children}</>;
+  return <div className="bg-blue-50">{children}</div>;
 };
 
 export default AdminLayout;

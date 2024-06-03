@@ -1,18 +1,57 @@
-import { getTempLinks } from "@/services/tempLinks";
+import { db } from "@/lib/db";
+import Form from "./components/Form";
 
 const AdminHome = async () => {
-  const tempLinks = await getTempLinks();
+  const tempLinks = await db.tempLink.findMany({
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+    select: {
+      category: true,
+      categoryNew: true,
+      postedBy: {
+        select: {
+          email: true,
+          name: true,
+          id: true,
+          username: true,
+        },
+      },
+      subCategory: true,
+      subCategoryNew: true,
+      updatedAt: true,
+      createdAt: true,
+      description: true,
+      id: true,
+      title: true,
+      url: true,
+    },
+  });
+
+  const categories = await db.category.findMany({
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+
+  const subCategories = await db.subCategory.findMany({
+    select: {
+      id: true,
+      name: true,
+    },
+  });
 
   return (
-    <div className="container mt-8">
-      {tempLinks.links.map((link) => (
-        <div key={link.id} className="p-2">
-          <h2 className="text-lg font-medium">{link.title}</h2>
-          <div className="flex items-center gap-2">
-            <button className="text-green-600">Accept</button>
-            <button className="text-red-600">Reject</button>
-          </div>
-        </div>
+    <div className="container mt-8 flex flex-col gap-4">
+      {tempLinks.map((link) => (
+        <Form
+          tempLink={link}
+          categories={categories}
+          subCategories={subCategories}
+        />
       ))}
     </div>
   );
