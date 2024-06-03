@@ -1,5 +1,8 @@
 "use client";
+import acceptTempLink from "@/actions/links/acceptTempLink";
+import rejectTempLink from "@/actions/links/rejectTempLink";
 import { useCallback, useState } from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   tempLink: {
@@ -39,12 +42,25 @@ const Form = ({ tempLink, categories, subCategories }: Props) => {
 
   const handleAccept = useCallback(async () => {
     // TODO: call acceptTempLink
-    // const res = await acceptTempLink()
-    // if (!res.success) {
-    //   toast.error(res.message);
-    // } else {
-    //   toast.success(res.message);
-    // }
+    const res = await acceptTempLink({
+      id: tempLink.id,
+      title: finalTitle,
+      description: finalDescription,
+      category: tempLink.categoryNew ? finalCategoryName : tempLink.category,
+      subCategory: tempLink.subCategoryNew
+        ? finalSubCategoryName
+        : tempLink.subCategory,
+      categoryNew: tempLink.categoryNew,
+      subCategoryNew: tempLink.subCategoryNew,
+      createdAt: tempLink.createdAt,
+      url: finalUrl,
+      userId: tempLink.postedBy?.id,
+    });
+    if (!res.success) {
+      toast.error(res.message);
+    } else {
+      toast.success(res.message);
+    }
   }, [
     finalTitle,
     finalDescription,
@@ -54,8 +70,14 @@ const Form = ({ tempLink, categories, subCategories }: Props) => {
     finalSubCategoryName,
   ]);
 
-  const handleReject = useCallback(() => {
-    // TODO: call rejectTempLink
+  const handleReject = useCallback(async () => {
+    const res = await rejectTempLink({ id: tempLink.id });
+
+    if (!res.success) {
+      toast.error(res.message);
+    } else {
+      toast.success(res.message);
+    }
   }, [tempLink]);
 
   return (
