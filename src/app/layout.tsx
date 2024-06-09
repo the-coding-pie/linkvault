@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "bg-background text-foreground flex flex-col relative overflow-x-hidden overflow-y-auto",
+          "bg-background text-foreground flex flex-col relative overflow-x-hidden overflow-y-auto bg-slate-50",
           inter.className
         )}
       >

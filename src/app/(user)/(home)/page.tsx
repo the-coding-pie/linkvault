@@ -54,9 +54,11 @@ const Home = async () => {
               <Link
                 key={category.id}
                 href={`/categories/${category.id}`}
-                className="flex gap-3 cursor-pointer border px-4 py-3 rounded"
+                className="flex gap-3 cursor-pointer border px-4 py-3 rounded-md bg-white shadow-sm items-center"
               >
-                <Folder className="w-6 h-6 bg-yellow-200" />
+                <div className="bg-purple-100 p-1 rounded-md">
+                  <Folder className="w-6 h-6 text-purple-400" />
+                </div>
 
                 <span className="font-medium">{category.name}</span>
               </Link>

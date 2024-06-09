@@ -47,9 +47,11 @@ const SubCategories = async ({ params: { categoryId } }: Props) => {
               <Link
                 key={sub.id}
                 href={`/links/${sub.id}`}
-                className="flex gap-3 cursor-pointer border px-4 py-3 rounded"
+                className="flex gap-3 cursor-pointer border px-4 py-3 rounded-md items-center bg-white shadow-sm"
               >
-                <FileTextIcon className="w-6 h-6 bg-blue-200" />
+                <div className="bg-pink-100 p-1 rounded-md">
+                  <FileTextIcon className="w-6 h-6 text-pink-600" />
+                </div>
 
                 <span className="font-medium">{sub.name}</span>
               </Link>

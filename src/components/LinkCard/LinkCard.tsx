@@ -48,7 +48,7 @@ const LinkCard = ({
   }, [link, revalidatePathKeys, revalidateTagKey]);
 
   return (
-    <div className="link-card flex gap-4 border px-4 py-4 rounded-md">
+    <div className="link-card bg-white shadow-sm flex gap-4 border px-4 py-4 rounded-md">
       <div className="left flex flex-col items-center">
         {user ? (
           user.emailVerified ? (
@@ -65,7 +65,8 @@ const LinkCard = ({
                 <ArrowBigUp
                   className={cn(
                     "w-7 h-7 min-w-7 stroke-[1px]",
-                    link.votes.includes(user.id) && "fill-blue-500"
+                    link.votes.includes(user.id) &&
+                      "text-emerald-500 fill-emerald-500"
                   )}
                 />
               </button>
@@ -84,7 +85,7 @@ const LinkCard = ({
       </div>
       <div className="right">
         <div className="extras text-gray-600 text-xs flex items-center gap-2 mb-1 flex-wrap">
-          <div className="posted-by font-semibold text-gray-900">
+          <div className="posted-by font-medium text-gray-900">
             u/{link.postedBy.username}
           </div>
           .
@@ -94,7 +95,7 @@ const LinkCard = ({
             })}
           </time>
         </div>
-        <h2 className="text-lg font-bold mb-1">
+        <h2 className="text-lg font-bold mb-1 text-gray-800">
           <Link href={link.url} target="_blank">
             {link.title}
             <ExternalLinkIcon className="inline-block ml-2 w-4 h-4 min-w-4" />
@@ -107,9 +108,19 @@ const LinkCard = ({
 
         {category && subCategory && (
           <div className="cats-and-subs text-xs flex items-center gap-2 mt-6 flex-wrap">
-            <Link href={`/categories/${category.id}`}>{category.name}</Link>
+            <Link
+              href={`/categories/${category.id}`}
+              className="bg-green-100 text-green-600 px-1 py-0.5 rounded-md"
+            >
+              {category.name}
+            </Link>
             &gt;
-            <Link href={`/links/${subCategory.id}`}>{subCategory.name}</Link>
+            <Link
+              href={`/links/${subCategory.id}`}
+              className="bg-green-100 text-green-600 px-1 py-0.5 rounded-md"
+            >
+              {subCategory.name}
+            </Link>
           </div>
         )}
       </div>

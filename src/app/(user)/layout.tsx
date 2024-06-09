@@ -16,7 +16,7 @@ export default function UserLayout({
   return (
     <>
       <Header />
-      <main className="flex-1 mt-[80px] container">{children}</main>
+      <main className="flex-1 mt-[80px] container pb-28">{children}</main>
       <Footer />
     </>
   );
