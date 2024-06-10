@@ -1,18 +1,16 @@
-import LinkCard from "@/components/LinkCard/LinkCard";
 import validateRequest from "@/lib/auth/validateRequest";
 import { getCategories } from "@/services/categories";
-import { getTopLinks } from "@/services/topLinks";
-import { Folder, TrendingUpIcon } from "lucide-react";
+import { Folder } from "lucide-react";
 import Link from "next/link";
 
 const Home = async () => {
   const { user } = await validateRequest();
   const { categories } = await getCategories();
-  const { topLinks } = await getTopLinks();
+  // const { topLinks } = await getTopLinks();
 
   return (
     <div className="page">
-      <section className="top-links mb-16">
+      {/* <section className="top-links mb-16">
         <h2 className="text-xl font-bold mb-4">
           Top Links{" "}
           <TrendingUpIcon className="inline-block ml-2 text-green-500" />
@@ -38,7 +36,7 @@ const Home = async () => {
             <p>No links found</p>
           )}
         </div>
-      </section>
+      </section> */}
 
       <section className="all-categories">
         <div className="header mb-4">
