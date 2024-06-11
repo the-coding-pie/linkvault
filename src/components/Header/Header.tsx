@@ -24,7 +24,7 @@ const Header = async () => {
           ) : (
             <>
               <LoginModal>
-                <Button variant={"ghost"}>Login</Button>
+                <AddLinkButton user={user!} />
               </LoginModal>
               <RegisterModal>
                 <Button>Sign Up</Button>

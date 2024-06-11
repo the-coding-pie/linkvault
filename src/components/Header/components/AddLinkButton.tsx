@@ -11,7 +11,11 @@ interface Props {
 const AddLinkButton = ({ user }: Props) => {
   return (
     <div>
-      {user.emailVerified ? (
+      {!user ? (
+        <Button variant={"ghost"}>
+          <PlusIcon className="mr-2 h-4 w-4" /> Submit Link
+        </Button>
+      ) : user.emailVerified ? (
         <AddLinkModal>
           <Button variant={"ghost"}>
             <PlusIcon className="mr-2 h-4 w-4" /> Submit Link
