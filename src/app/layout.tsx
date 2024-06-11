@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "react-hot-toast";
 import Providers from "@/Providers";
 import Script from "next/script";
+import NextTopLoader from "nextjs-toploader";
 
 export const dynamic = "force-dynamic";
 
@@ -22,11 +23,11 @@ export default function RootLayout({
           inter.className
         )}
       >
+        <NextTopLoader color="#22c55e" />
         <Providers>
           {children}
           <Toaster position="bottom-right" />
         </Providers>
-
         {process.env.NODE_ENV === "production" && (
           <>
             <Script
